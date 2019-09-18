@@ -6,6 +6,7 @@ import com.csy.pipeline.biz.bo.CreateOrderResponse;
 import com.csy.pipeline.biz.service.CreateOrderService;
 import com.csy.pipeline.common.Result;
 import com.csy.pipeline.core.EngineResolver;
+import com.csy.pipeline.core.aop.ServerCatch;
 import com.csy.pipeline.core.engine.EngineExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class CreateOrderServiceImpl implements CreateOrderService {
     @Autowired
     private EngineResolver engineResolver;
 
+    @ServerCatch
     @Override
     public Result<CreateOrderResponse> createOrder(CreateOrderRequest request) {
 

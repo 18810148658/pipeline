@@ -4,7 +4,9 @@ import com.csy.pipeline.biz.CreateOrderEngineExecutor;
 import com.csy.pipeline.biz.bo.CreateOrderContext;
 import com.csy.pipeline.biz.bo.CreateOrderRequest;
 import com.csy.pipeline.biz.pipe.b2c.BuildB2cOrderPipe;
+import com.csy.pipeline.common.exception.ParamException;
 import com.csy.pipeline.core.engine.EngineName;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +17,10 @@ public class CreateB2cOrderEngineExecutor extends CreateOrderEngineExecutor {
     private BuildB2cOrderPipe buildB2cOrderPipe;
 
     @Override
-    protected void validParameter(CreateOrderRequest createOrderRequest) {
-
+    protected void validCustomParameter(CreateOrderRequest request) {
+        if (request.getCartId() == null && CollectionUtils.isEmpty(request.getSkuInfoList())) {
+            throw new ParamException("购物信息不能为空");
+        }
     }
 
     @Override

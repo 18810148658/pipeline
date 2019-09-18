@@ -4,6 +4,7 @@ import com.csy.pipeline.biz.CreateOrderEngineExecutor;
 import com.csy.pipeline.biz.pipe.bargain.BargainPipe;
 import com.csy.pipeline.biz.pipe.bargain.BuildBargainOrderPipe;
 import com.csy.pipeline.biz.bo.*;
+import com.csy.pipeline.common.exception.ParamException;
 import com.csy.pipeline.core.engine.EngineName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,10 @@ public class CreateBargainOrderEngineExecutor extends CreateOrderEngineExecutor 
     private BargainPipe bargainPipe;
 
     @Override
-    protected void validParameter(CreateOrderRequest createOrderRequest) {
-
+    protected void validCustomParameter(CreateOrderRequest request) {
+        if (request.getBargainInfoId() == null) {
+            throw new ParamException("砍价信息不能为空");
+        }
     }
 
     @Override

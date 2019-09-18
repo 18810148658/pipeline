@@ -24,7 +24,9 @@ public abstract class AbstractEngineExecutor<T, S, R> implements InitializingBea
     @Autowired
     protected Pipeline pipeline;
 
-    protected abstract void validParameter(T t);
+    protected abstract void validCommonParameter(T t);
+
+    protected abstract void validCustomParameter(T t);
 
     protected abstract String setKey(T t, S s);
 
@@ -52,7 +54,9 @@ public abstract class AbstractEngineExecutor<T, S, R> implements InitializingBea
 
     protected void doPipeline(T t, S s) {
 
-        validParameter(t);
+        validCommonParameter(t);
+
+        validCustomParameter(t);
 
         InvocationChain<T, S> invocationChain = pipeline.newInvocation(t, s);
 
