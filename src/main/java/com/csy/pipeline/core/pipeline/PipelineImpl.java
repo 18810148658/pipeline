@@ -107,7 +107,7 @@ public class PipelineImpl<T, S> implements Pipeline<T, S> {
             if (executedIndex < pipeList.size()) {
                 Pipe pipe = pipeList.get(executedIndex);
 
-                //由于原来是需要解析上一个节点是否成功 所以必须要用递归
+                //由于原来是需要解析上一个节点是否成功 所以必须要用递归 使用遍历不方便拿到是一个节点的返回值
                 // 但是现在改成抛异常了 就不需要解析上一个节点 可以直接改成遍历pipeList  阅读性更强
                 pipe.invoke(this);
             }
