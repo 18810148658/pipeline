@@ -32,7 +32,7 @@ public abstract class AbstractPipe<T, S> implements Pipe<T, S> {
                     invocationChain.getKey(), this.getClass().getSimpleName(), JSON.toJSONString(context));
 
         }
-
+//如果改成遍历的话 这里也可以改一下
         invocationChain.invokeNext();
 
     }
